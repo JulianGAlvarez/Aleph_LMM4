@@ -33,6 +33,8 @@ public class SunAI : MonoBehaviour
 
     void UpdatePath()
     {
+        //Update the Path creation
+
         if(seeker.IsDone())
            seeker.StartPath(rb.position, -target.position, OnPathComplete);
     }
@@ -49,9 +51,10 @@ public class SunAI : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+        //If there is NO Path
         if(path == null)
             return;
-
+        //If we reached the end of the Path
         if(currentWaypoint >= path.vectorPath.Count)
         {
             reachedEndOfPath = true;
@@ -60,6 +63,8 @@ public class SunAI : MonoBehaviour
         {
             reachedEndOfPath = false;
         }
+
+        //Moves the Sun towards the Player
 
         Vector2 direction = ((Vector2)path.vectorPath[currentWaypoint] - rb.position).normalized;
         Vector2 force = direction * speed * Time.deltaTime;
@@ -73,6 +78,7 @@ public class SunAI : MonoBehaviour
             currentWaypoint++;
         }
 
+        //Changes the Sun´s Orientation
         if(force.x >= 0.01f)
         {
             enemyGFX.localScale = new Vector3(-scaleX, scaleX, scaleX);
