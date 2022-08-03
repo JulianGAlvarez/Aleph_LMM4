@@ -12,7 +12,9 @@ public class CountorFinder : WebCamera
     [SerializeField] private float MinArea = 5000f;
 
     [SerializeField] private PolygonCollider2D PolygonCollider;
-    private Vector2[] vectorList;
+    public Vector2[] vectorList;
+    
+    public float contourX, contourY;
 
     private Mat image;
     private Mat processImage = new Mat();
@@ -36,12 +38,18 @@ public class CountorFinder : WebCamera
             Point[] points = Cv2.ApproxPolyDP(contour, CurveAccuracy, true);
             var area = Cv2.ContourArea(contour);
 
+            
+
             if(area > MinArea)
             {
                 drawContour(processImage, new Scalar(125, 125, 125), 2, points);
-
+                
+                
                 PolygonCollider.pathCount++;
                 PolygonCollider.SetPath(PolygonCollider.pathCount - 1, toVector2(points));
+
+                
+
             }
         }
 
@@ -55,12 +63,18 @@ public class CountorFinder : WebCamera
        return true;
     }
 
-    private Vector2[] toVector2(Point[] points)
+    public Vector2[] toVector2(Point[] points)
     {
         vectorList = new Vector2[points.Length];
+
         for(int i = 0; i < points.Length; i++)
         {
             vectorList[i] = new Vector2(points[i].X, points[i].Y);
+
+
+            contourX = points[i].X /2;
+            contourY = points[i].Y / 2;
+            
         }
         return vectorList;
     }

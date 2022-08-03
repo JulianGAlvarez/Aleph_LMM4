@@ -9,14 +9,15 @@ public class Player : MonoBehaviour
     public float moveSpeed;
     Vector3 mousePosition;
     Vector2 position = new Vector2(0f, 0f);
+    Vector2 contourPos;
 
+    Vector2 playerPos = new Vector2(0f, 0f);
     private Detection detection;
 
     float lastY = 0;
     float lastX;
 
-   
-    
+
     
 
 
@@ -26,8 +27,10 @@ public class Player : MonoBehaviour
         detection = (Detection)FindObjectOfType(typeof(Detection));
 
         playerRb = GetComponent<Rigidbody2D>();
+
+        contourPos = new Vector2(FindObjectOfType<CountorFinder>().contourX, FindObjectOfType<CountorFinder>().contourY);
         
-      
+       
     }
 
     // Update is called once per frame
@@ -40,6 +43,7 @@ public class Player : MonoBehaviour
         mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
         position = Vector2.Lerp(transform.position, mousePosition, moveSpeed);
         
+        playerPos = Vector2.Lerp(transform.position, contourPos, moveSpeed);
         
 
         /*
@@ -59,6 +63,10 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        playerRb.MovePosition(position);
+
+       playerRb.MovePosition(contourPos);
+
+        
+
     }
 }

@@ -6,6 +6,7 @@ using Pathfinding;
 public class SunAI : MonoBehaviour
 {
     public Transform target;
+    public GameObject splashEffect;
 
     public float speed = 200f;
     public float nextWayPointDistance = 3f;
@@ -36,7 +37,7 @@ public class SunAI : MonoBehaviour
         //Update the Path creation
 
         if(seeker.IsDone())
-           seeker.StartPath(rb.position, -target.position, OnPathComplete);
+           seeker.StartPath(rb.position, target.position, OnPathComplete);
     }
 
     void OnPathComplete(Path p)
@@ -51,6 +52,8 @@ public class SunAI : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
+
+        AstarPath.active.Scan();
         //If there is NO Path
         if(path == null)
             return;
@@ -88,5 +91,17 @@ public class SunAI : MonoBehaviour
             enemyGFX.localScale = new Vector3(scaleX, scaleX, scaleX);
 
         }
+
     }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if(collision.collider.tag == "Player")
+        {
+            GameObject e = Instantiate(splashEffect) as GameObject;
+            e.transform.position = transform.position;
+        }
+    }
+
+
 }
