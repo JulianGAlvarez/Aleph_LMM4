@@ -15,7 +15,7 @@ public class RandomMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+       
         waitTime = startWaitTime;
 
         moveSpot.position = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));

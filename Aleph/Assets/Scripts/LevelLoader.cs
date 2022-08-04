@@ -15,8 +15,6 @@ public class LevelLoader : MonoBehaviour
     {
         levelName = SceneManager.GetActiveScene().name;
 
-        
-
     }
     // Update is called once per frame
     void Update()
@@ -24,17 +22,23 @@ public class LevelLoader : MonoBehaviour
         if (levelName == "Zero" && Input.GetKeyUp(KeyCode.RightArrow))
         {
             LoadNextLevel();
+            FindObjectOfType<AudioManager>().PlaySound("PortalAbierto");
+            
+            FindObjectOfType<AudioManager>().PlaySound("FondoMuestra");
         }
         
         if (levelName == "Active" && Input.GetKeyDown(KeyCode.RightArrow))
         {
             LoadNextLevel();
+            FindObjectOfType<AudioManager>().PlaySound("PortalAbierto");
+            FindObjectOfType<AudioManager>().StopSound("FondoMuestra");
         }
 
 
 
         if (levelName == "Active")
         {
+           
             transitionBreach.SetTrigger("Active");
         } 
     }

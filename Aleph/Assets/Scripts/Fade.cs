@@ -10,6 +10,7 @@ public class Fade : MonoBehaviour
     void Start()
     {
         StartCoroutine(StartFade());
+        
     }
 
     // Update is called once per frame
@@ -27,7 +28,7 @@ public class Fade : MonoBehaviour
 
     IEnumerator StartFade()
     {
-        yield return new WaitForSeconds(3);
+        yield return new WaitForSeconds(3 * Time.deltaTime);
         transitionFade.SetTrigger("Start");
     }
 }
