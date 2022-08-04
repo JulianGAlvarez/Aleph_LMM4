@@ -21,10 +21,17 @@ public class LevelLoader : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (levelName == "Zero" && Input.GetKeyUp(KeyCode.RightArrow))
         {
             LoadNextLevel();
         }
+        
+        if (levelName == "Active" && Input.GetKeyDown(KeyCode.RightArrow))
+        {
+            LoadNextLevel();
+        }
+
+
 
         if (levelName == "Active")
         {

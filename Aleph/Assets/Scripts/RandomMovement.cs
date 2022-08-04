@@ -38,8 +38,9 @@ public class RandomMovement : MonoBehaviour
                 waitTime -= Time.deltaTime;
             }
         }
+      
 
-        if (Input.GetMouseButtonDown(0))
+            if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             moveSpot.position = new Vector2(0, -9.3f);
             startWaitTime = 10;

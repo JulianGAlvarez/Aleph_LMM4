@@ -54,6 +54,7 @@ public class SunAI : MonoBehaviour
     {
 
         AstarPath.active.Scan();
+
         //If there is NO Path
         if(path == null)
             return;
